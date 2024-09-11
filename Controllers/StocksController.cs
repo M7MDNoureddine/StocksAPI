@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using firstapi.Data;
+using firstapi.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace firstapi.Models.Controllers
@@ -21,10 +22,10 @@ namespace firstapi.Models.Controllers
         [HttpGet]
         public IActionResult GetAll() 
         {
-            var stocks = context.Stocks.ToList();
+            var stocks = context.Stocks.ToList().Select(s => s.ToStockDTO()); //foreach(s in Stocks)
             return Ok(stocks);
-            // return NotFound();
         }
+        
         [HttpGet("{id}")]
         public IActionResult GetByID([FromRoute]int id)
         { 
@@ -35,8 +36,7 @@ namespace firstapi.Models.Controllers
                 return NotFound();
             }
 
-            
-            return Ok(stock);
+            return Ok(stock.ToStockDTO());
         }
     }
 }
