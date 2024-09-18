@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace firstapi.Models.Controllers
 {
-    [Route("api/[Controller]")] //
+    [Route("api/[controller]")] //
     //[Route("api/stocks")]
     [ApiController]
     public class StocksController : ControllerBase
@@ -22,12 +22,17 @@ namespace firstapi.Models.Controllers
         [HttpGet]
         public IActionResult GetAll() 
         {
-            var stocks = context.Stocks.ToList().Select(s => s.ToStockDTO()); //foreach(s in Stocks)
+            var stocks = context.Stocks.ToList();
+            if (stocks == null || !stocks.Any())
+            {
+                return NotFound(stocks); // Check if this is being triggered
+            }
             return Ok(stocks);
-        }
+
+    }
         
         [HttpGet("{id}")]
-        public IActionResult GetByID([FromRoute]int id)
+        public IActionResult getbyid([FromRoute]int id)
         { 
             var stock = context.Stocks.Find(id);
 
@@ -37,6 +42,7 @@ namespace firstapi.Models.Controllers
             }
 
             return Ok(stock.ToStockDTO());
+
         }
     }
 }
