@@ -1,6 +1,5 @@
 using firstapi.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationDBContext> //to register the class ApplicationDBContext
-(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")) ); // 
-builder.Services.AddControllers(); // finds classes that are inherited from controller base
+builder.Services.AddDbContext<ApplicationDBContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+); 
+builder.Services.AddControllers(); // This registers your controllers
 
 var app = builder.Build();
 
@@ -19,9 +19,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-} 
+}
 
+app.UseRouting(); // Enables routing middleware
+app.UseAuthorization(); // Enables authorization middleware
 
-
+app.MapControllers(); // Maps controller routes to be accessible
 
 app.Run();
+
