@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AOuz0pUYHla9hu6Vkp8sOvAEggY6Ju6ac75n8WLs8INqoOncytYfRnVh4Z09+9MDFCVJpXBciJwUIFGfNSOZsw==",
+  "dgSpecHash": "s4AdkVK7VJlmg/uzSOlbSFspd+ChzUv3a099oUmIYa0gdAQ5DPdK8k/xcSr4Vw06RMVCnCTHru7PiNTuWwbIwg==",
   "success": true,
-  "projectFilePath": "/home/jibna/Desktop/dotnet/api/firstapi/firstapi.csproj",
+  "projectFilePath": "/home/jibna/Desktop/dotnet/api/StocksAPI/firstapi.csproj",
   "expectedPackageFiles": [
     "/home/jibna/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/home/jibna/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

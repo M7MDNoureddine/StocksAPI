@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/jibna/Desktop/dotnet/api/firstapi/firstapi.csproj": {}
+    "/home/jibna/Desktop/dotnet/api/StocksAPI/firstapi.csproj": {}
   },
   "projects": {
-    "/home/jibna/Desktop/dotnet/api/firstapi/firstapi.csproj": {
+    "/home/jibna/Desktop/dotnet/api/StocksAPI/firstapi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jibna/Desktop/dotnet/api/firstapi/firstapi.csproj",
+        "projectUniqueName": "/home/jibna/Desktop/dotnet/api/StocksAPI/firstapi.csproj",
         "projectName": "firstapi",
-        "projectPath": "/home/jibna/Desktop/dotnet/api/firstapi/firstapi.csproj",
+        "projectPath": "/home/jibna/Desktop/dotnet/api/StocksAPI/firstapi.csproj",
         "packagesPath": "/home/jibna/.nuget/packages/",
-        "outputPath": "/home/jibna/Desktop/dotnet/api/firstapi/obj/",
+        "outputPath": "/home/jibna/Desktop/dotnet/api/StocksAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jibna/.nuget/NuGet/NuGet.Config"
