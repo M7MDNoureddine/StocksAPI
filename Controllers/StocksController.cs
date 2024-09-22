@@ -1,7 +1,6 @@
 using firstapi.Data;
 using firstapi.Mappers;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using firstapi.dtos.StocksDtos;
 
 namespace firstapi.Models.Controllers
@@ -45,13 +44,61 @@ namespace firstapi.Models.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateStockRequestDTO  stockDTO)
+        public IActionResult Create([FromBody] CreateStockRequestDTO stockDTO)
         {
             var stock = stockDTO.ToStockFromCreateDTO();
             context.Stocks.Add(stock);
             context.SaveChanges();
+
             return CreatedAtAction(nameof(GetByID), new { id = stock.Id }, stock.ToStockDTO());
+            // nameof(GetByID) is used instead of "GetByID" in case of a rename.
+            // the first parameter is to identify the IActionResult method that could be used to retrieve the info. creating the location header of the Created: 201 response.
+            // second parameter is to pass the info needed to the method (if any) which will be displayed in the location header also.
+            // the third parameter is the body of the Created: 201 response. 
 
         }
+
+        //[HttpPut]
+        //[Route("{id}")]
+        [HttpPut("{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] UpdateStockRequestDTO updateDTO)
+        {
+            // pull the stock from db using its id
+            var stockModel = context.Stocks.FirstOrDefault(x => x.Id == id);
+
+            // check if null
+            if (stockModel == null)
+            {
+                return NotFound();
+            }
+
+            //update stock from data received in body
+            stockModel.Symbol = updateDTO.Symbol;
+            stockModel.CompanyName = updateDTO.CompanyName;
+            stockModel.Purchase = updateDTO.Purchase;
+            stockModel.LastDiv = updateDTO.LastDiv;
+            stockModel.Industry = updateDTO.Industry;
+            stockModel.MarketCap = updateDTO.MarketCap;
+
+            // save changes to the db
+            context.SaveChanges();
+
+            // retrun statement
+            return Ok(stockModel.ToStockDTO());
+
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var stockModel = context.Stocks.FirstOrDefault(x => x.Id == id);
+            context.Stocks.Remove(stockModel);
+            context.SaveChanges();
+
+            return NoContent();
+
+        }
+
     }
 }
